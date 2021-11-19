@@ -9,7 +9,7 @@ const inputRef = document.querySelector('.feedback-form  input');
 formRef.addEventListener('submit', onFormSubmit);
 formRef.addEventListener('input', throttle(onTextareaInput, 500));
 
-let formData = { email: '', message: '' };
+let formData = {};
 
 function onTextareaInput(evt) {
   formData[evt.target.name] = evt.target.value;
@@ -26,7 +26,7 @@ populateTextarea();
 function onFormSubmit(evt) {
   evt.preventDefault();
   console.log(formData);
-  formData = { email: '', message: '' };
+  formData = {};
   evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
