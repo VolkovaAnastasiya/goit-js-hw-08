@@ -9,7 +9,7 @@ const inputRef = document.querySelector('.feedback-form  input');
 formRef.addEventListener('submit', onFormSubmit);
 formRef.addEventListener('input', throttle(onTextareaInput, 500));
 
-let formData = {};
+let formData = { email: '', message: '' };
 
 function onTextareaInput(evt) {
   formData[evt.target.name] = evt.target.value;
@@ -26,7 +26,7 @@ populateTextarea();
 function onFormSubmit(evt) {
   evt.preventDefault();
   console.log(formData);
-  formData = {};
+  formData = { email: '', message: '' };
   evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
@@ -45,8 +45,11 @@ function populateTextarea() {
 
     inputRef.value = parsedMessage.email;
     textareaRef.value = parsedMessage.message;
-    if (inputRef.value === undefined || parsedMessage.email === undefined) {
+    if (parsedMessage.email === undefined) {
       return (inputRef.value = '');
+    }
+    if (parsedMessage.message === undefined) {
+      return (textareaRef.value = '');
     }
   }
 }
